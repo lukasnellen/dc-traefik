@@ -1,0 +1,20 @@
+[frontends]
+  [frontends.old]
+    backend = "old"
+    passHostHeader = true
+    [frontends.old.routes.test_1]
+      rule = "Host:old.example.com;PathPrefix:/old_app"
+
+  [frontends.old_root]
+    backend = "old"
+    passHostHeader = true
+    priority = 1
+    [frontends.old_root.routes.test_1]
+      rule = "Host:old.example.com"
+
+
+[backends]
+  [backends.old]
+    [backends.old.servers]
+      [backends.old.servers.server0]
+      url = "http://127.0.0.1:81"

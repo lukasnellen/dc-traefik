@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  traefik:
+    image: traefik
+    restart: always
+    volumes:
+      - type: bind
+        source: ./traefik.toml
+        target: /etc/traefik/traefik.toml
+      - type: bind
+        source: ./rules
+        target: /etc/traefik/rules
+      - type: bind
+        source: ./acme
+        target: /etc/traefik/acme
+      - type: bind
+        source: /var/log/traefik
+        target: /var/log/traefik
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    network_mode: host
