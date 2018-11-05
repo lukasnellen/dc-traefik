@@ -1,9 +1,9 @@
 Traefik setup with docker-compose
 =================================
 
-This provides a simple example setup to run traefik (traefik.io) as a
-reverse proxy for a host with several web apps in docker containers,
-run using docker-compose, and legacy apps.
+This provides a simple example setup to run traefik
+(https://traefik.io) as a reverse proxy for a host with several web
+apps in docker containers, run using docker-compose, and legacy apps.
 
 - The trafik container itself runs on the host network to have direct
   access to the required ports instead of running it on a dedicated
@@ -27,4 +27,10 @@ run using docker-compose, and legacy apps.
   `rules`. We recommend to create and edit files separately in
   `rules.edit` to prevent traefik from trying to use incomplete rules
   files during editing.
-  
+
+- When migrating an old site to containerized apps with traefik
+  ingress, you can set up a catch-all rule with prioriy 1, as done for
+  `frontends.old_root` in `rules.edit/old.toml`. This way, connections
+  will get sent to the old site unless you have a new app, with a
+  higher priority. Almost anything will have a priority higher than 1,
+  since the priority is based on the length of the rule.
